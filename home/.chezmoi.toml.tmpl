@@ -1,0 +1,31 @@
+{{- $ephemeral := false -}}
+{{- $headless := false -}}
+{{- $wsl := false -}}
+
+{{- if or (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode" "martin") -}}
+{{-   $headless = true -}}
+{{- end -}}
+
+{{- if .chezmoi.kernel -}}
+{{-     if hasKey .chezmoi.kernel "osrelease" -}}
+{{-         $wsl = (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+{{-     end -}}
+{{- end -}}
+
+{{- if not $ephemeral -}}
+{{-   if stdinIsATTY -}}
+{{-     $headless = promptBoolOnce . "headless" "Is the machine without a screen and keyboard? (e.g. remote machine)?" -}}
+{{-     $ephemeral = promptBoolOnce . "ephemeral" "Is the machine ephemeral i.e. (e.g. VM or a docker container)?" -}}
+{{-   else -}}
+{{-     $ephemeral = true -}}
+{{-     $headless = true -}}
+{{-   end -}}
+{{- end -}}
+
+[data]
+# true if this machine is ephemeral, e.g. a cloud or VM instance
+ephemeral = {{ $ephemeral }}
+# true if this machine does not have a screen and keyboard
+headless = {{ $headless }}
+# true if running in WSL
+wsl = {{ $wsl }}

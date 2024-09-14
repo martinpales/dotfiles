@@ -1,0 +1,34 @@
+[alias]
+	a = add
+	b = branch
+	c = commit
+	co = checkout
+	cob = checkout -b
+	com = checkout main
+	d = diff
+[color]
+	ui = auto
+[core]
+	editor = vim
+	whitespace = trailing-space,space-before-tab
+[diff]
+{{- if .wsl }}
+	tool = vscode
+{{- else }}
+	tool = vimdiff
+{{- end }}
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+{{- if .wsl }}
+        tool = vscode
+{{- else }}
+        tool = vimdiff
+{{- end }}
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+{{- if not .ephemeral }}
+[url "git@github.com:chezmoi/"]
+	insteadOf = https://github.com/chezmoi/
+{{- end }}
+{{/* vim: set filetype=gitconfig: */}}
