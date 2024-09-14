@@ -1,10 +1,103 @@
-alias ls='ls --color=auto'
-alias l='ls -l'
-alias ll='ls -lahF'
+# aliases
 
-alias cp='cp -iv'
-alias mv='mv -iv'
+alias cm='chezmoi'
+alias cz='chezmoi'
+
+alias ls='ls -hF --color=auto'
+alias l='ls -l'
+alias ll='ls -la'
+#export LS_COLORS='*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+
+alias mkdir='mkdir -pv'
+
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+alias ..5='cd ../../../../..'
+
+alias cpr='rsync -ah --info=progress2'
+alias cpv='rsync -hpogbr --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --info=progress2'
+alias cp='cp -v'
+alias mv='mv -v'
 alias rm='rm -iv'
 
+alias h='history_search'
+
+alias df='df -h'
+alias du='du -h -d1'
+
+GREP_OPTS='--color=auto --exclude-dir={.git,.svn}'
+alias grep="grep $GREP_OPTS"
+alias egrep="egrep $GREP_OPTS"
+alias fgrep="fgrep $GREP_OPTS"
+unset GREP_OPTS
+
+alias ping='ping -c 4'
+alias fping='ping -c 30 -i.2'
+
+if type 'htop' &> /dev/null; then
+  alias top='htop'
+fi
+
+alias now='date +"%Y-%m-%dT%H:%M:%S"'
+alias nowts='date -u +%s'
+
+alias path='echo $PATH | tr ":" "\n"'
+alias fpath='for fp in $fpath; do echo $fp; done; unset fp'
+
+# Enables simple aliases to be sudo'ed.
+# See http://www.gnu.org/software/bash/manual/bashref.html#Aliases
+alias sudo='sudo ';
+
+alias g='git'
 alias gs='git status'
 
+alias vi=vim
+alias nv=nvim
+
+alias d=docker
+alias db='docker build'
+alias dbp='docker builder prune'
+alias dr='docker run --rm -it'
+
+alias dc='docker compose' 
+alias dcl='docker compose logs' 
+alias dclf='docker compose logs -f' 
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcdv='docker compose down -v'
+
+alias t='tmux'
+
+if command -v md5sum > /dev/null; then
+  alias md5='md5sum'
+else
+  alias md5='openssl md5 -r'
+fi
+
+if command -v shasum > /dev/null; then
+  alias sha1='shasum -a 1'
+else
+  alias sha1='openssl sha1 -r'
+fi
+
+if command -v shasum > /dev/null; then
+  alias sha256='shasum -a 256'
+else
+  alias sha256='openssl sha256 -r'
+fi
+
+if command -v curl > /dev/null; then
+  alias forecast='curl --silent --compressed --max-time 10 --url "https://wttr.in?F"'
+else
+  alias forecast='wget -qO- --compression=auto --timeout=10 "https://wttr.in?F"'
+fi
+
+if command -v curl > /dev/null; then
+  alias weather='curl --silent --compressed --max-time 10 --url "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
+else
+  alias weather='wget -qO- --compression=auto --timeout=10 "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
+fi
+
+# vim: ft=zsh sw=2 ts=2 et

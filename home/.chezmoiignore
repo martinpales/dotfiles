@@ -1,0 +1,3 @@
+.cache/zsh/plugins/ohmyzsh/cache/**
+.cache/zsh/themes/powerlevel10k/**/*.zwc
+

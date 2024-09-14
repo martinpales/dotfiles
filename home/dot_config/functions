@@ -1,0 +1,16 @@
+# Functions
+
+function history_search() {
+    if [ -z "$1" ]; then
+        history
+    else
+        history | grep "$1"
+    fi
+}
+
+function pass() {
+    local size=${1:-12}
+    cat /dev/random | tr -dc 'A-Za-z0-9!@#$' | head -c$size
+}
+
+# vim: ft=zsh sw=4 ts=4 et

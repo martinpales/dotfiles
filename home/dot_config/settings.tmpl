@@ -1,0 +1,51 @@
+# Settings
+
+if [ -d /usr/local/man ]; then
+    export MANPATH="/usr/local/man:$MANPATH"
+fi
+
+LOCAL_BIN=$HOME/.local/bin
+if [ ! -d $LOCAL_BIN ]; then
+  mkdir -p $LOCAL_BIN
+fi
+export PATH=$PATH:$LOCAL_BIN
+
+export GOPATH="$HOME/.local/share/go"
+export GOBIN=$LOCAL_BIN
+
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Configure less:
+#   F: automatically exit if the entire file can be displayed in first screen.
+#   I: case-insensitive search.
+#   R: Show ANSI colors.
+#   S: Truncate long lines.
+#   X: Prevent clearing the screen when exiting.
+# See: https://relentlesscoding.com/2019/01/06/make-less-options-permanent-or-the-missing-lessrc/
+export LESS="FIRSX"
+export PAGER="less"
+
+{{- if .wsl }}
+export EDITOR='code'
+{{- else }}
+if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='vim'
+elif command -v nvim > /dev/null; then
+    export EDITOR='nvim';
+else
+    export EDITOR='vim'
+fi
+{{- end }}
+
+export VISUAL=$EDITOR
+
+if [ -z "${BASH_VERSINFO+x}" ]; then
+    CURRENT_SHELL="zsh"
+else
+    CURRENT_SHELL="bash"
+fi
+
+unset CURRENT_SHELL
+
+# vim: ft=zsh sw=4 ts=4 et

@@ -1,0 +1,142 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable approximate completions
+zstyle ':completion:*' completer _extensions _complete _ignored _approximate
+#zstyle ':completion:*' completer _expand _complete _ignored _approximate
+
+# Use cache 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
+
+# Autocomplete options for cd instead of directory stack
+zstyle ':completion:*' complete-options true
+
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+
+# Smart matching of dashed values, e.g. f-b matching foo-bar
+zstyle ':completion:*' matcher-list '' '' 'm:{[:lower:]}={[:upper:]} m:{[:lower:][:upper:]}={[:upper:][:lower:]} r:|[._-]=** r:|=** l:|=*'
+#zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*'
+
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+#source $DOTFILES/zsh/plugins/kubectl-completion/_kubectl
+#zstyle ':completion:*:*:kubectl:*' list-grouped false
+
+# Nicer format for completion messages
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
+
+# Automatically update PATH entries
+zstyle ':completion:*' rehash true
+
+zstyle :compinstall filename '$ZDOTDIR/.zshrc'
+
+# Tell the shell that it should not add anything to $path if it's there already
+typeset -U PATH path
+
+autoload -Uz colors
+colors
+
+# Colored completion listings
+zmodload zsh/complist
+
+# Completion listing extensions
+autoload -Uz compinit
+
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+setopt EXTENDED_GLOB
+setopt MAGIC_EQUAL_SUBST
+setopt NOMATCH
+
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+#setopt SHARE_HISTORY
+
+ZSH_CUSTOM_COMPLETIONS=$ZSH_CACHE_DIR/completions
+ZSH_CUSTOM_PLUGINS=$ZSH_CACHE_DIR/plugins
+ZSH_CUSTOM_THEMES=$ZSH_CACHE_DIR/themes
+
+command_exists () {
+  (( $+commands[$1] ))
+}
+
+alias src='source'
+if [ -d $ZSH_CUSTOM_PLUGINS/zsh-defer ]; then
+  alias src='zsh-defer source'
+  source $ZSH_CUSTOM_PLUGINS/zsh-defer/zsh-defer.plugin.zsh
+fi
+
+if [ -d $ZSH_CUSTOM_PLUGINS/ohmyzsh ]; then
+  OMZ_PLUGINS="$ZSH_CUSTOM_PLUGINS/ohmyzsh/plugins"
+  src "$OMZ_PLUGINS/command-not-found/command-not-found.plugin.zsh"
+
+  if command_exists docker; then
+    fpath=( "$OMZ_PLUGINS/docker" $fpath )
+  fi
+  if command_exists go; then
+    src "$OMZ_PLUGINS/golang/golang.plugin.zsh"
+  fi
+  if command_exists kubectl; then
+    src "$OMZ_PLUGINS/kubectl/kubectl.plugin.zsh"
+  fi
+fi
+
+if [ -d $ZSH_CUSTOM_PLUGINS/zsh-autosuggestions ]; then
+  src $ZSH_CUSTOM_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+fi
+
+if [ -d $ZSH_CUSTOM_COMPLETIONS/zsh-completions ]; then
+  fpath=( "$ZSH_CUSTOM_COMPLETIONS/zsh-completions/src" $fpath )
+fi
+
+if [ -f $XDG_CONFIG_HOME/functions ]; then
+    source $XDG_CONFIG_HOME/functions
+fi
+
+if [ -f $XDG_CONFIG_HOME/aliases ]; then
+    source $XDG_CONFIG_HOME/aliases
+fi
+
+compinit -u
+
+# Use emacs mode (Vim is nice but not in a shell)
+bindkey -e
+
+# History substring search
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+# Keys are defined in /etc/zsh/zshrc
+bindkey "$key[Up]" up-line-or-beginning-search
+bindkey "$key[Down]" down-line-or-beginning-search
+
+# Never start in the root file system
+[[ "$PWD" != "/" ]] || cd
+
+DISABLE_AUTO_UPDATE="true"
+
+if [ -d $ZSH_CUSTOM_THEMES/powerlevel10k ]; then
+  POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+  source $ZSH_CUSTOM_THEMES/powerlevel10k/powerlevel10k.zsh-theme
+  source $ZDOTDIR/.p10k.zsh
+else
+  echo "$ZSH_CUSTOM_THEMES/powerlevel10k directory is missing"
+fi
+
