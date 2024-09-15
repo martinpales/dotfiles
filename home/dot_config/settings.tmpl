@@ -10,6 +10,8 @@ if [ ! -d $LOCAL_BIN ]; then
 fi
 export PATH=$PATH:$LOCAL_BIN
 
+export GITSTATUS_NUM_THREADS=2
+
 export GOPATH="$HOME/.local/share/go"
 export GOBIN=$LOCAL_BIN
 

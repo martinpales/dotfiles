@@ -117,6 +117,10 @@ if [ -f $XDG_CONFIG_HOME/aliases ]; then
     source $XDG_CONFIG_HOME/aliases
 fi
 
+if [ -f $XDG_CONFIG_HOME/settings ]; then
+    source $XDG_CONFIG_HOME/settings
+fi
+
 compinit -u
 
 # Use emacs mode (Vim is nice but not in a shell)
