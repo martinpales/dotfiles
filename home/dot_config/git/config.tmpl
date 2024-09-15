@@ -6,6 +6,8 @@
 	cob = checkout -b
 	com = checkout main
 	d = diff
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(dim white)- %an%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)' --all
+	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
 [color]
 	ui = auto
 [core]
@@ -28,6 +30,8 @@
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 {{- if not .ephemeral }}
+[push]
+	default = current
 [url "git@github.com:chezmoi/"]
 	insteadOf = https://github.com/chezmoi/
 {{- end }}
