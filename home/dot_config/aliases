@@ -37,7 +37,7 @@ alias ping='ping -c 4'
 alias fping='ping -c 30 -i.2'
 
 if type 'htop' &> /dev/null; then
-  alias top='htop'
+    alias top='htop'
 fi
 
 alias now='date +"%Y-%m-%dT%H:%M:%S"'
@@ -68,36 +68,40 @@ alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 alias dcdv='docker compose down -v'
 
+alias python='python3'
+
 alias t='tmux'
 
+alias vc="openssl x509 -text -noout -in"
+
 if command -v md5sum > /dev/null; then
-  alias md5='md5sum'
+    alias md5='md5sum'
 else
-  alias md5='openssl md5 -r'
+    alias md5='openssl md5 -r'
 fi
 
 if command -v shasum > /dev/null; then
-  alias sha1='shasum -a 1'
+    alias sha1='shasum -a 1'
 else
-  alias sha1='openssl sha1 -r'
+    alias sha1='openssl sha1 -r'
 fi
 
 if command -v shasum > /dev/null; then
-  alias sha256='shasum -a 256'
+    alias sha256='shasum -a 256'
 else
-  alias sha256='openssl sha256 -r'
+    alias sha256='openssl sha256 -r'
 fi
 
 if command -v curl > /dev/null; then
-  alias forecast='curl --silent --compressed --max-time 10 --url "https://wttr.in?F"'
+    alias forecast='curl --silent --compressed --max-time 10 --url "https://wttr.in?F"'
 else
-  alias forecast='wget -qO- --compression=auto --timeout=10 "https://wttr.in?F"'
+    alias forecast='wget -qO- --compression=auto --timeout=10 "https://wttr.in?F"'
 fi
 
 if command -v curl > /dev/null; then
-  alias weather='curl --silent --compressed --max-time 10 --url "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
+    alias weather='curl --silent --compressed --max-time 10 --url "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
 else
-  alias weather='wget -qO- --compression=auto --timeout=10 "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
+    alias weather='wget -qO- --compression=auto --timeout=10 "https://wttr.in/?format=%l:+(%C)+%c++%t+\[%h,+%w\]"'
 fi
 
-# vim: ft=zsh sw=2 ts=2 et
+# vim: ft=zsh sw=4 ts=4 et
