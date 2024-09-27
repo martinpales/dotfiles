@@ -1,0 +1,139 @@
+set nocompatible
+
+set fileformat=unix
+set encoding=utf-8
+
+" jump to the last position when reopening a file
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Make the escape key more responsive by decreasing the wait time for an
+" escape sequence (e.g., arrow keys).
+if !has('nvim') && &ttimeoutlen == -1
+  set ttimeout
+  set ttimeoutlen=100
+endif
+
+if !(exists('g:did_load_filetypes') && exists('g:did_load_ftplugin') && exists('g:did_indent_on'))
+  filetype plugin indent on
+endif
+
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
+autocmd FileType go         setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType html       setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+autocmd FileType javascript setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType python     setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+
+" Ctrl-U in insert mode deletes a lot. Use Ctrl-G u to first break undo,
+" so that you can undo Ctrl-U without undoing what you typed before it.
+if empty(mapcheck('<C-U>', 'i'))
+  inoremap <C-U> <C-G>u<C-U>
+endif
+
+if empty(mapcheck('<C-W>', 'i'))
+  inoremap <C-W> <C-G>u<C-W>
+endif
+
+set autoread
+set noerrorbells visualbell t_vb=
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set clipboard=unnamed
+
+set laststatus=1
+
+set textwidth=79
+
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set autoindent
+set smartindent
+
+set complete-=i
+set smarttab
+
+set expandtab
+set nowrap
+set list
+" set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set listchars=tab:→\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
+" Change lines when using arrow keys
+set whichwrap+=<,>,h,l,[,]
+" Change lines when using backspace
+set backspace=indent,eol,start
+
+set scrolloff=8
+
+set showcmd
+set noshowmode
+"set conceallevel=1
+
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+if executable("rg")
+  set grepprg=rg\ --vimgrep
+endif
+
+" search and replace the word under the cursor
+nnoremap <C-h> :%s/\<<C-r><C-w>\>//gc<left><left><left>
+" search and replace in selected text
+vnoremap <C-h> :s//gc<left><left><left>
+
+nnoremap <C-a> ^
+nnoremap <C-e> $
+inoremap <C-a> <C-o>0
+inoremap <C-e> <C-o>$
+
+" Fix PageUp behavior at the top
+nnoremap <C-b> <C-b>H0
+nnoremap <PageUp> <PageUp>H0
+
+nmap <C-q> :q<CR>
+
+" Jump between two files
+nnoremap <BS> <C-^>
+
+" Clear highlighted results, backspace to remove last command
+" nnoremap <CR> :noh<CR><CR>:<backspace>
+
+set splitbelow
+
+let mapleader = ";"
+
+" Remap visual block mode, since Ctrl-V is usually mapped by the terminal
+nnoremap <silent> <leader>v <C-v>
+
+" Clear highlighted results, backspace to remove last command
+nnoremap <silent> <leader><CR> :noh<CR>
+
+nnoremap <silent> <leader>q :q!<CR>
+nnoremap <silent> <leader>w :w!<cr>
+
+" Toggle number mode
+nnoremap <silent> <leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR><CR>
+
+" Toggle paste
+nnoremap <silent> <leader>p :set paste!<CR>
+
+" Open terminal
+nnoremap <silent> <leader>t :term<CR>
+
+if has('terminal')
+  " mappings to move out from terminal to other views
+  tnoremap <C-h> <C-w>h
+  tnoremap <C-j> <C-w>j
+  tnoremap <C-k> <C-w>k
+  tnoremap <C-l> <C-w>l
+endif
+
+so ~/.vim/plugins.vim
+so ~/.vim/config.vim
