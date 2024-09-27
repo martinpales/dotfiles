@@ -10,10 +10,13 @@ if [ ! -d $LOCAL_BIN ]; then
 fi
 export PATH=$PATH:$LOCAL_BIN
 
-export GITSTATUS_NUM_THREADS=2
+if [ -d /usr/local/go/bin ]; then
+    export GOBIN=$LOCAL_BIN
+    export GOPATH="$HOME/.local/share/go"
+    export PATH=$PATH:/usr/local/go/bin
+fi
 
-export GOPATH="$HOME/.local/share/go"
-export GOBIN=$LOCAL_BIN
+export GITSTATUS_NUM_THREADS=2
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -49,5 +52,8 @@ else
 fi
 
 unset CURRENT_SHELL
+
+export NVM_DIR="$HOME/.local/share/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # vim: ft=zsh sw=4 ts=4 et
