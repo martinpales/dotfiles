@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Install NVM https://github.com/nvm-sh/nvm
+
+readonly NVM_TMP_DIR="/tmp/nvm"
+readonly NVM_PACKAGE="/tmp/nvm.tar.gz"
+readonly NVM_INSTALLER="$NVM_TMP_DIR/install.sh"
+
+export NPM_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/npmrc"
+export NVM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/nvm"
+
+install_nvm() {
+  # install nvm if not already installed
+  if [[ -d "$NVM_DIR" ]] || command -v nvm >/dev/null 2>&1; then
+    echo "nvm is already installed"
+    exit
+  fi
+  echo "nvm binary not found, installing..."
+  mkdir "$NVM_DIR" || exit
+
+  # install nvm
+  version=$(curl -s https://api.github.com/repos/nvm-sh/nvm/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
+  url="https://github.com/nvm-sh/nvm/archive/refs/tags/${version}.tar.gz"
+
+  mkdir "$NVM_TMP_DIR" || exit
+  curl -sL "$url" -o "$NVM_PACKAGE" || exit
+  tar -xf "$NVM_PACKAGE" -C "$NVM_TMP_DIR" --strip-components=1 || exit
+  PROFILE=/dev/null bash "$NVM_INSTALLER" || exit
+  rm -r "$NVM_TMP_DIR"
+  rm "$NVM_PACKAGE"
+}
+
+install_nvm
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+nvm install --lts  # install lts
