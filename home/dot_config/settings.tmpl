@@ -31,6 +31,12 @@ export LC_ALL=en_US.UTF-8
 export LESS="FIRSX"
 export PAGER="less"
 
+if [ -d /opt/nvim-linux-x86_64/bin ]; then
+    export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+    alias vi=nvim
+    alias vim=nvim
+fi
+
 {{- if .wsl }}
 export EDITOR='code'
 {{- else }}
