@@ -97,6 +97,10 @@ inoremap <C-e> <C-o>$
 nnoremap <C-b> <C-b>H0
 nnoremap <PageUp> <PageUp>H0
 
+" Tab navigation
+nnoremap <A-Left> gT
+nnoremap <A-Right> gt
+
 nmap <C-q> :q<CR>
 
 " Jump between two files
@@ -125,7 +129,7 @@ nnoremap <silent> <leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR><CR>
 nnoremap <silent> <leader>p :set paste!<CR>
 
 " Open terminal
-nnoremap <silent> <leader>t :term<CR>
+" nnoremap <silent> <leader>t :term<CR>
 
 if has('terminal')
   " mappings to move out from terminal to other views
