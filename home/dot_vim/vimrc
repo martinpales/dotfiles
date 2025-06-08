@@ -98,6 +98,7 @@ nnoremap <C-b> <C-b>H0
 nnoremap <PageUp> <PageUp>H0
 
 " Tab navigation
+nnoremap <C-n> :tabnew<CR>
 nnoremap <A-Left> gT
 nnoremap <A-Right> gt
 
@@ -106,18 +107,23 @@ nmap <C-q> :q<CR>
 " Jump between two files
 nnoremap <BS> <C-^>
 
-" Clear highlighted results, backspace to remove last command
-" nnoremap <CR> :noh<CR><CR>:<backspace>
+" Jump between buffers
+nnoremap  <silent> <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 
 set splitbelow
 
-let mapleader = ";"
+" let mapleader = ";"
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 
 " Remap visual block mode, since Ctrl-V is usually mapped by the terminal
 nnoremap <silent> <leader>v <C-v>
 
 " Clear highlighted results, backspace to remove last command
 nnoremap <silent> <leader><CR> :noh<CR>
+" Hitting escape twice should clear any search highlights.
+nnoremap <ESC><ESC> :nohlsearch<CR>
 
 nnoremap <silent> <leader>q :q!<CR>
 nnoremap <silent> <leader>w :w!<cr>
