@@ -2,13 +2,16 @@
 call plug#begin('~/.vim/plugs')
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'cespare/vim-toml'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
+" Plug 'ericpruitt/tmux.vim', {'rtp': 'vim/'}
 call plug#end()
 
 " ----- Theme -----
@@ -20,10 +23,15 @@ colorscheme codedark
 
 " ----- Airline -----
 
+" let g:airline_theme='onedark'
+
 " let g:airline_powerline_fonts=1
 
 let g:airline_section_z = airline#section#create(['Ln %l/%L Col %v'])
 
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " ----- CoC -----
 
@@ -72,6 +80,9 @@ nnoremap <silent> <leader>h :History<CR>
 
 " Open text search
 nnoremap <silent> <leader>f :Rg<CR>
+
+" Open buffers
+nnoremap <silent> <leader>b :Buffers<CR>
 
 " Open jumps
 nnoremap <silent> <leader>j :Jumps<CR>
