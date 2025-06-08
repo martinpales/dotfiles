@@ -14,6 +14,8 @@ alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -iv'
 
+alias bat='batcat --theme=TwoDark --paging=never --style=plain'
+
 # rsync copy
 alias cpr='rsync -ah --info=progress2'
 # safe copy with attributes
