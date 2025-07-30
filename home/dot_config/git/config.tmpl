@@ -2,13 +2,16 @@
 	a = add
 	b = branch
 	c = commit
-	ca = commit --amend
+	cm = commit -m
+	ca = commit --amend --no-edit
+	cam = commit --amend -m
 	co = checkout
 	cob = checkout -b
 	com = checkout main
 	d = diff
 	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)' --all
 	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	s = status
 	undo = reset HEAD~1
 [color]
 	ui = auto
