@@ -40,6 +40,7 @@ alias dcd='docker compose down'
 alias dcdv='docker compose down -v'
 
 alias g='git'
+alias gl='git l'
 alias gs='git status'
 
 GREP_OPTS='--color=auto --exclude-dir={.git,.svn}'
