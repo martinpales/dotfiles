@@ -41,7 +41,8 @@ alias dcdv='docker compose down -v'
 
 alias g='git'
 alias gl='git l'
-alias gs='git status'
+alias gd='git d'
+alias gs='git s'
 
 GREP_OPTS='--color=auto --exclude-dir={.git,.svn}'
 alias grep="grep $GREP_OPTS"
@@ -81,8 +82,8 @@ fi
 
 alias vc="openssl x509 -text -noout -in"
 
-alias vi='vim'
-alias nv='nvim'
+alias v='vim'
+alias n='nvim'
 
 if command -v md5sum > /dev/null; then
     alias md5='md5sum'
