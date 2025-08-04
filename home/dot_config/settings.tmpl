@@ -10,9 +10,9 @@ if [ ! -d $LOCAL_BIN ]; then
 fi
 export PATH=$PATH:$LOCAL_BIN
 
+export GOPATH="$HOME/.local/share/go"
 if [ -d /usr/local/go/bin ]; then
     export GOBIN=$LOCAL_BIN
-    export GOPATH="$HOME/.local/share/go"
     export PATH=$PATH:/usr/local/go/bin
 fi
 
