@@ -3,10 +3,10 @@ call plug#begin('~/.vim/plugs')
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'cespare/vim-toml'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
@@ -33,41 +33,6 @@ let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" ----- CoC -----
-
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-" Always show the signcolumn for CoC diagnostics
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not already mapped
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-nmap <silent> gd <plug>(coc-definition)
-nmap <silent> gy <plug>(coc-type-definition)
-nmap <silent> gi <plug>(coc-implementation)
-nmap <silent> gr <plug>(coc-references)
-
-" Symbol renaming
-nmap <leader>rn <plug>(coc-rename)
-
-
 " ----- FZF -----
 
 " Open file search
@@ -79,6 +44,7 @@ nnoremap <silent> <leader>t :tabnew<CR>:Files<CR>
 nnoremap <silent> <leader>h :History<CR>
 
 " Open text search
+nnoremap <silent> <leader>/ :Rg<CR>
 nnoremap <silent> <leader>f :Rg<CR>
 
 " Open buffers
@@ -87,14 +53,11 @@ nnoremap <silent> <leader>b :Buffers<CR>
 " Open jumps
 nnoremap <silent> <leader>j :Jumps<CR>
 
-
-" ----- Go -----
-
-let g:go_list_type = "quickfix"
-
-autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <leader>t  <Plug>(go-test)
+" Resize splits
+nnoremap <silent> <leader><Up> :resize -3<CR>
+nnoremap <silent> <leader><Down> :resize +3<CR>
+nnoremap <silent> <leader><Left> :vertical resize -5<CR>
+nnoremap <silent> <leader><Right> :vertical resize +5<CR>
 
 " ----- NERDCommenter -----
 
