@@ -79,6 +79,8 @@ set smartcase
 set incsearch
 set hlsearch
 
+set splitbelow
+
 if executable("rg")
   set grepprg=rg\ --vimgrep
 endif
@@ -97,25 +99,35 @@ inoremap <C-e> <C-o>$
 nnoremap <C-b> <C-b>H0
 nnoremap <PageUp> <PageUp>H0
 
-" Tab navigation
-nnoremap <C-n> :tabnew<CR>
-nnoremap <A-Left> gT
-nnoremap <A-Right> gt
-
 nmap <C-q> :q<CR>
+
+" Move lines up or down preserving format
+vnoremap <C-Down> :m '>+1<CR>gv=gv
+vnoremap <C-Up> :m '<-2<CR>gv=gv
+inoremap <C-Down> <esc>:m .+1<CR>==gi
+inoremap <C-Up> <esc>:m .-2<CR>==gi
+nnoremap <C-Down> :m .+1<CR>==
+nnoremap <C-Up> :m .-2<CR>==
+
+" let mapleader = ";"
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+" Open new file adjacent to current file
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Select all
+nnoremap <leader>a ggVG
 
 " Jump between two files
 nnoremap <BS> <C-^>
 
 " Jump between buffers
-nnoremap  <silent> <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
-nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+nnoremap  <silent> <tab>   :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 
-set splitbelow
-
-" let mapleader = ";"
-nnoremap <SPACE> <Nop>
-let mapleader = " "
+" Close the current buffer and move to the previous one
+nnoremap <leader>q :bp <BAR> bd #<CR>
 
 " Remap visual block mode, since Ctrl-V is usually mapped by the terminal
 nnoremap <silent> <leader>v <C-v>
@@ -125,7 +137,7 @@ nnoremap <silent> <leader><CR> :noh<CR>
 " Hitting escape twice should clear any search highlights.
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
-nnoremap <silent> <leader>q :q!<CR>
+" Quick save
 nnoremap <silent> <leader>w :w!<cr>
 
 " Toggle number mode
@@ -133,9 +145,6 @@ nnoremap <silent> <leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR><CR>
 
 " Toggle paste
 nnoremap <silent> <leader>p :set paste!<CR>
-
-" Open terminal
-" nnoremap <silent> <leader>t :term<CR>
 
 if has('terminal')
   " mappings to move out from terminal to other views
