@@ -1,18 +1,30 @@
 [alias]
 	a = add
+	aliases = !sh -c 'git config --get-regexp '^alias\\.' | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | sort'
+	amend = commit --amend
+	# Add files to last commit
+	append = commit --amend --no-edit
 	b = branch
-	c = commit
+	# List remote-tracking and local branches
+	branches = branch --all -v
 	cm = commit -m
-	ca = commit --amend --no-edit
-	cam = commit --amend -m
 	co = checkout
 	cob = checkout -b
 	com = checkout main
 	d = diff
-	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)' --all
-	ll = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-	s = status
+	discard = "!f() { git restore ${1:-.}; }; f"
+	dl = -c diff.external=difft log -p --ext-diff
+	ds = -c diff.external=difft show --ext-diff
+	dt = -c diff.external=difft diff
+	C
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)'
+	la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)' --all
+	last = log -1 HEAD --stat
+	s = status -sb
+	sc = switch -c
+	tags = tag -l --sort=-version:refname
 	undo = reset HEAD~1
+	unstage = reset HEAD --
 [color]
 	ui = auto
 [core]
@@ -22,7 +34,7 @@
 {{- if .wsl }}
 	tool = vscode
 {{- else }}
-	tool = vimdiff
+	external = difft
 {{- end }}
 [difftool "vscode"]
 	cmd = code --wait --diff $LOCAL $REMOTE
@@ -37,6 +49,9 @@
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 {{- if not .ephemeral }}
+[pull]
+	# Keep local commits on top of the tree
+	rebase = true
 [push]
 	default = current
 [url "git@github.com:chezmoi/"]
