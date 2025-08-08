@@ -6,15 +6,13 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias ..5='cd ../../../../..'
 
-if command -v batcat > /dev/null; then
-    alias bat='batcat'
+if command -v bat > /dev/null; then
+    alias cat='bat --theme=TwoDark --paging=never --style=plain'
 fi
 
 alias cp='cp -v'
 alias mv='mv -v'
 alias rm='rm -iv'
-
-alias bat='batcat --theme=TwoDark --paging=never --style=plain'
 
 # rsync copy
 alias cpr='rsync -ah --info=progress2'
@@ -32,16 +30,19 @@ alias db='docker build'
 alias dbp='docker builder prune'
 alias dr='docker run --rm -it'
 
-alias dc='docker compose' 
-alias dcl='docker compose logs' 
-alias dclf='docker compose logs -f' 
+alias dc='docker compose'
+alias dcl='docker compose logs'
+alias dclf='docker compose logs -f'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 alias dcdv='docker compose down -v'
 
+alias dt='difft --display side-by-side'
+
 alias g='git'
-alias gl='git l'
 alias gd='git d'
+alias gl='git l'
+alias gla='git la'
 alias gs='git s'
 
 GREP_OPTS='--color=auto --exclude-dir={.git,.svn}'
