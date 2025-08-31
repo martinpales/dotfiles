@@ -138,6 +138,7 @@ nnoremap <silent> <leader><CR> :noh<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " Quick save
+nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <leader>w :w!<cr>
 
 " Toggle number mode

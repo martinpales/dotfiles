@@ -73,6 +73,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCreateDefaultMappings = 0
 
 " Commenter bindings
+map <silent> <C-/> <plug>NERDCommenterToggle
 map <silent> <leader>cc <plug>NERDCommenterToggle
 map <silent> <leader>ce <plug>NERDCommenterToEOL
 map <silent> <leader>cs <plug>NERDCommenterSexy
