@@ -129,6 +129,16 @@ nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :writ
 " Close the current buffer and move to the previous one
 nnoremap <leader>q :bp <BAR> bd #<CR>
 
+" Open buffers in vertical splits
+execute "set <M-1>=\e1"
+nnoremap <silent> <leader><M-1> :vert sba<CR>
+" Open buffers in horizontal splits
+execute "set <M-2>=\e2"
+nnoremap <silent> <leader><M-2> :sba<CR>
+" Close splits
+execute "set <M-0>=\e0"
+nnoremap <silent> <leader><M-0> :on<CR>
+
 " Remap visual block mode, since Ctrl-V is usually mapped by the terminal
 nnoremap <silent> <leader>v <C-v>
 
@@ -138,8 +148,8 @@ nnoremap <silent> <leader><CR> :noh<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
 " Quick save
-nnoremap <silent> <C-s> :w!<cr>
-nnoremap <silent> <leader>w :w!<cr>
+nnoremap <silent> <C-s> :w!<CR>
+nnoremap <silent> <leader>w :w!<CR>
 
 " Toggle number mode
 nnoremap <silent> <leader>n :exec &nu==&rnu? "se nu!" : "se rnu!"<CR><CR>
