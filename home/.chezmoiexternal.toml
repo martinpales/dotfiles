@@ -39,5 +39,10 @@
     type = "file"
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     refreshPeriod = "168h"
+[".local/bin/tmux-sessionizer"]
+    type = "file"
+    executable = true
+    url = "https://raw.githubusercontent.com/ThePrimeagen/tmux-sessionizer/master/tmux-sessionizer"
+    refreshPeriod = "168h"
 
 # vim: ft=toml sw=4 ts=4 et
