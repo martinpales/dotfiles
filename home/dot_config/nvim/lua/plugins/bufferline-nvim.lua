@@ -1,0 +1,46 @@
+-- https://github.com/akinsho/bufferline.nvim
+
+-- return {
+-- 	"romgrk/barbar.nvim",
+-- 	dependencies = {
+-- 		"nvim-tree/nvim-web-devicons",
+-- 	},
+-- 	init = function()
+-- 		vim.g.barbar_auto_setup = false
+-- 	end,
+-- 	opts = {
+-- 		minimum_padding = 1,
+-- 		maximum_padding = 1,
+-- 	},
+-- 	version = "^1.9.0",
+-- }
+
+return {}
+-- return {
+-- 	"akinsho/bufferline.nvim",
+-- 	version = "*",
+-- 	config = function()
+-- 		local bufferline = require("bufferline")
+-- 		bufferline.setup({
+-- 			options = {
+-- 				themable = true,
+-- 				buffer_close_icon = "󰅖",
+-- 				show_close_icon = false,
+-- 				-- separator_style = "thin",
+-- 				-- style_preset = bufferline.style_preset.default,
+-- 				style_preset = bufferline.style_preset.minimal,
+-- 				indicator = {
+-- 					style = "underline",
+-- 				},
+-- 				options = {
+-- 					hover = {
+-- 						enabled = true,
+-- 						delay = 200,
+-- 						reveal = { "close" },
+-- 					},
+-- 				},
+-- 			},
+-- 		})
+-- 	end,
+-- 	dependencies = "nvim-tree/nvim-web-devicons",
+-- }

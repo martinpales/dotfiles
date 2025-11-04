@@ -1,0 +1,5 @@
+{{- if .ephemeral }}
+  require("config.lite")
+{{- else }}
+  require("config.lazy")
+{{- end }}
