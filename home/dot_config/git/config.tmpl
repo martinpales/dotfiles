@@ -16,9 +16,8 @@
 	dl = -c diff.external=difft log -p --ext-diff
 	ds = -c diff.external=difft show --ext-diff
 	dt = -c diff.external=difft diff
-	C
-	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)'
-	la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset)' --all
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset) %an'
+	la = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold green)%ar%C(reset)%C(auto)%d%C(reset) %an' --all
 	last = log -1 HEAD --stat
 	s = status -sb
 	sc = switch -c
