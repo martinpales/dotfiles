@@ -29,20 +29,20 @@
     url = "https://github.com/romkatv/powerlevel10k/archive/v1.20.0.tar.gz"
     exact = true
     stripComponents = 1
-[".cache/tmux"]
+[".config/tmux/plugins/tpm"]
     type = "archive"
-    url = "https://github.com/gpakosz/.tmux/archive/master.tar.gz"
+    url = "https://github.com/tmux-plugins/tpm/archive/master.tar.gz"
     exact = true
     stripComponents = 1
-    refreshPeriod = "168h"
-[".vim/autoload/plug.vim"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     refreshPeriod = "168h"
 [".local/bin/tmux-sessionizer"]
     type = "file"
     executable = true
-    url = "https://raw.githubusercontent.com/ThePrimeagen/tmux-sessionizer/master/tmux-sessionizer"
+    url = "https://raw.githubusercontent.com/martinpales/tmux-sessionizer/master/tmux-sessionizer"
+    refreshPeriod = "168h"
+[".vim/autoload/plug.vim"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     refreshPeriod = "168h"
 
 # vim: ft=toml sw=4 ts=4 et

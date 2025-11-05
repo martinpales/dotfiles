@@ -108,6 +108,9 @@ if [ -d $ZSH_CUSTOM_PLUGINS/ohmyzsh ]; then
     if command_exists go; then
         src "$OMZ_PLUGINS/golang/golang.plugin.zsh"
     fi
+    if command_exists helm; then
+        src "$OMZ_PLUGINS/helm/helm.plugin.zsh"
+    fi
     if command_exists kubectl; then
         src "$OMZ_PLUGINS/kubectl/kubectl.plugin.zsh"
     fi
@@ -141,7 +144,7 @@ fi
 
 unalias src
 
-bindkey -s "^t" "tmux-sessionizer\n"
+bindkey -s "^s" "tmux-sessionizer\n"
 
 # Use emacs mode (Vim is nice but not in a shell)
 bindkey -e
