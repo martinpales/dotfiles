@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 {
 	tmux list-sessions -F '#S' | grep -v '^_popup_' | while read -r session; do
