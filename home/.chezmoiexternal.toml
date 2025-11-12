@@ -38,7 +38,6 @@
 [".local/bin/fzf"]
     type = "archive-file"
     url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-linux_amd64.tar.gz"
-    path = "fzf"
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
