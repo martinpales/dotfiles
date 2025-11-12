@@ -35,6 +35,13 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+[".local/bin/bat"]
+    type = "archive-file"
+    url = "https://github.com/sharkdp/bat/releases/download/v0.26.0/bat-v0.26.0-x86_64-unknown-linux-gnu.tar.gz"
+    path = "bat"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
 [".local/bin/difft"]
     type = "archive-file"
     url = "https://github.com/Wilfred/difftastic/releases/download/0.65.0/difft-x86_64-unknown-linux-gnu.tar.gz"
