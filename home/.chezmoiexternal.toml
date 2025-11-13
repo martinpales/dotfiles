@@ -48,6 +48,13 @@
     path = "difft"
     exact = true
     refreshPeriod = "168h"
+[".local/bin/fd"]
+    type = "archive-file"
+    url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-unknown-linux-gnu.tar.gz"
+    path = "fd"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
 [".local/bin/fzf"]
     type = "archive-file"
     url = "https://github.com/junegunn/fzf/releases/download/v0.66.1/fzf-0.66.1-linux_amd64.tar.gz"
