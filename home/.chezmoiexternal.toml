@@ -89,7 +89,7 @@
 [".local/bin/tmux-sessionizer"]
     type = "file"
     executable = true
-    url = "https://raw.githubusercontent.com/martinpales/tmux-sessionizer/master/tmux-sessionizer"
+    url = "https://raw.githubusercontent.com/martinpales/tmux-sessionizer/refs/heads/feature/zero-depth/tmux-sessionizer"
     refreshPeriod = "168h"
 [".vim/autoload/plug.vim"]
     type = "file"
