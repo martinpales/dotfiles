@@ -25,6 +25,9 @@ vim.opt.rtp:prepend(lazypath)
 require("config.lite")
 require("config.plugcmds")
 
+
+vim.g.tmux_navigator_no_mappings = 1
+
 local plugins_dir = "plugins"
 
 require("lazy").setup({
